@@ -1,0 +1,13 @@
+#accent {
+   background-color: black;
+   /* color: 글자색 */
+   color: #fff;
+ }
+
+ p {
+   font-style: italic;
+ }
+
+ .blue {
+   color: blue;
+ }
