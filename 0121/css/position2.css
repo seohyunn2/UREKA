@@ -1,0 +1,23 @@
+* {
+   margin: 0;
+   padding: 0;
+}
+
+#contents {
+   background: url('../images/bg-3.jpg') no-repeat; /* 중복 X */
+   background-size: cover; /* 꽉 채우게 */
+   width: 800px;
+   height: 500px;
+   /* 이 요소 안에서 움직일 수 있도록 포지셔닝 해줘야 */
+   position: relative;
+}
+
+h1 {
+   color: #fff;
+   font-size: 120px;
+   text-shadow: 5px 9px 0 #000;
+   /* 전체 화면에 대해서 아래처럼 배치가 됨 */
+   position: absolute; /* 상위 요소 위치 기준 */
+   right: 100px;
+   bottom: 100px;
+}
