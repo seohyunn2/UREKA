@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>table-test</title>
+
+   <style>
+      table {
+         border: 1px solid black;
+         border-collapse: collapse;
+         caption-side: bottom;
+      }
+      th, td {
+         border: 1px solid black;
+         padding: 10px;
+         text-align: right;
+      }
+      .colored {
+         background-color:rgb(230, 250, 255);
+      }
+      caption {
+         text-align: right;
+      }
+   </style>
+</head>
+
+<body>
+   <table>
+      <caption>
+         출처: 통계청 100대 지표
+      </caption>
+      <thead>
+         <tr>
+            <th>지표</th>
+            <th>2019</th>
+            <th>2020</th>
+            <th>2021</th>
+            <th class="colored">2022</th>
+         </tr>
+      </thead>
+
+      <tbody>
+         <tr>
+            <td><b>가구수</b></td>
+            <td>20,891,348</td>
+            <td>21,484,785</td>
+            <td>22,022,753</td>
+            <td class="colored">22,383,187</td>
+         </tr>
+         <tr>
+            <td><b>1인가구</b></td>
+            <td>6,147,516</td>
+            <td>6,643,354</td>
+            <td>7,165,788</td>
+            <td class="colored">7,502,350</td>
+         </tr>
+      </tbody>
+
+   </table>   
+</body>
+</html>
