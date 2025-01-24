@@ -19,6 +19,7 @@
   <script>
     function getSum(num) {
       // 예외 처리는 어떻게 해야됨?
+      // if(num !== null)
 
 
       // sum 초기화 까먹지마라...
@@ -30,8 +31,8 @@
     }
 
     let n = prompt('얼마까지 더할까요?');
-    let res = getSum(n)
-    document.write(`1부터 ${n}까지 더하면 ${res}`);
+    // let res = getSum(n)
+    document.write(`1부터 ${n}까지 더하면 ${getSum(parseInt(n))}`);
   </script>
 </body>
 </html>
