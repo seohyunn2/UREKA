@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>가위 바위 보</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    .container {
+      margin: 30px;
+      margin-top:60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    button img {
+      width: 150px;
+    }
+    .buttons {
+      display: flex;
+      margin-top: 20px;
+      justify-content: center;
+      gap: 5px;
+      width: 100%;
+    }
+    
+    button {
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 5px;
+      border-radius: 5%;
+      margin: 20px;
+    }
+
+    button:hover{
+      background-color: #444; 
+      transform: scale(1.2);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;;
+    }
+
+    .text {
+      text-align: center;
+      font-size: 1.2em;
+    }
+
+    #computer {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #computer img {
+      width: 100px;
+      margin: 20px;
+    }
+
+    #result {
+      margin: 30px;
+      margin-top: 10px;
+      font-size: 3em;
+      color: tomato;
+      font-weight: 600;
+    }
+    .bold {
+      font-size: 1.1em;
+      font-weight: 500;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+  <h1>가위 바위 보 게임하기</h1>
+  <div class="text">가위 바위 보 중 하나를 선택하세요.</div>
+    <div class="buttons select">
+      <button id="scissor">
+        <img src="images/scissors.png" alt="가위">
+      </button>
+      <button id="rock">
+        <img src="images/rock.png" alt="바위">
+      </button>
+      <button id="paper">
+        <img src="images/paper.png" alt="보">
+      </button>
+    </div>
+    
+    <div id="computer"></div>
+    <div id = "result"></div>
+  </div>
+
+  <script src = "rock.js"></script>
+</body>
+</html>
