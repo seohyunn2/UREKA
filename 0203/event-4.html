@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM event 객체</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center; /* 문서가 이미지만 잡고 있어서 상하 안됨 -> body height값 줘야됨 */
+      height: 100vh;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <img src="images/cat.jpg" id="cat">
+  </div>
+
+  <script>
+    // DOM을 사용해서 이벤트 처리하기
+    //id가 cat인 요소 선택 
+    let cat = document.querySelector("#cat");
+    cat.onclick = function(event) {
+      alert(`이미지 파일: ${this.src}`); // 이미지 파일 경로를 출력
+      // id가 cat인 요소 선택 -> <img> 태그 부분 전체 선택됨 -> 거기에 있는 src?
+    }
+  </script>
+</body>
+</html>
