@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 80%;
+      height: 200px;
+      background-color: lightyellow;
+    }
+  </style>
+
+</head>
+<body>
+  <button id="btn">데이터 가져오기</button>
+  <div id="content"></div>
+  <script src="js/httpRequest.js"></script>
+  <script>
+    // 버튼이 클릭되면 비동기 통신 시도
+    document.querySelector("#btn").addEventListener("click", function() {
+      sendRequest('https://jsonplaceholder.typicode.com/posts/1', null, ajaxHandler, "GET");
+    });
+
+    // 비동기 통신에 대한 readyState가 변경될 때 호출되는 콜백 함수
+    function ajaxHandler() {
+      if(httpRequest.readyState == 4) { // 응답아 완료 됐고
+        if(httpRequest.status == 200)  {// 응답이 정상일 때
+          let jsonData = httpRequest.response;
+          console.log(jsonData);
+
+          let info = JSON.parse(jsonData);
+          
+          let content = `<table>
+                            <tr>
+                              <td>userid</td><td>${info.userId}</td>
+                            </tr>
+                            <tr>
+                              <td>id</td><td>${info.id}</td>
+                            </tr>
+                            <tr>
+                              <td>title</td><td>${info.title}</td>
+                            </tr>
+                            <tr>
+                              <td>body</td><td>${info.body}</td>
+                            </tr>
+                          </table>  
+                          `
+          document.querySelector('#content').innerHTML = content;
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
