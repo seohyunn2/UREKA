@@ -1,4 +1,4 @@
-package graph;
+package lecture.graph;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -6,8 +6,8 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class AdjMatrix_bfs {
-	static boolean map[][];
-	static boolean visited[];  //노드 개수만큼만 만들기
+	static boolean [][] map;
+	static boolean[] visited;  //노드 개수만큼만 만들기
 	static int N;
 	public static void main(String[] args) throws Exception {
 		System.setIn(new FileInputStream("src/graph/AdjMatrix.txt"));

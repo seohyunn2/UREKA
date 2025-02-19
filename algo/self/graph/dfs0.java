@@ -3,12 +3,13 @@ package graph;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.Stack;
+import java.util.StringTokenizer;
 
 // 인접행렬
 public class dfs0 {
-	private static boolean[][] map;
-	private static boolean[] visited;
+	private static boolean map[][];
+	private static boolean visited[];
 	private static int N = 0;
 
 	//	깊이 우선 탐색
