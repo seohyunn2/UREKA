@@ -5,12 +5,12 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class AdjMatrix_dfs1 {
+public class dfs1 {
 	static boolean[][] map;
 	static boolean[] visit;  //노드 개수만큼만 만들기
 	static int N;
 	public static void main(String[] args) throws Exception {
-		System.setIn(new FileInputStream("graph/AdjMatrix.txt"));
+		System.setIn(new FileInputStream("algo/self/graph/AdjMatrix.txt"));
 		BufferedReader in =  new BufferedReader(new InputStreamReader(System.in));
 		int T = Integer.parseInt(in.readLine());
 		for (int tc = 1; tc <=T; tc++) {

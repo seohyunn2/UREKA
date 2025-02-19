@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 // 인접행렬
-public class AdjMatrix_dfs0 {
+public class dfs0 {
 	private static boolean[][] map;
 	private static boolean[] visited;
 	private static int N = 0;
