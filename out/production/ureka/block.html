@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>블록 레벨과 인라인 레벨</title>
+   <style>
+      body * { /* body 하위에 있는 모든 요소에 대해 */
+         border: 1px solid blue;
+      }
+      .accent {
+         color: red;
+         font-weight: bold;
+      }
+
+      .box1 {
+         /* 테두리까지 포함해서 계산해라 */
+         /* border, padding 값 상관없이 다 포함한 그 박스의 width가 정해진대로 */
+         box-sizing: border-box;
+         width: 500px;
+         height: 100px;
+         padding: 20px;
+      }
+      .box2 {
+         width: 70%;
+         height: 100px;
+      }
+   </style>
+</head>
+
+<body>
+   <h1>시간이란...</h1>
+   <div>내일 죽을 것처럼 <span class="accent">오늘</span>을 살고</div>
+   <p>영원히 살 것처럼 <br>내일을 꿈꾸어라.</p>
+
+   <div class="box1">box1</div>
+   <div class="box2">box2</div>
+</body>
+</html>

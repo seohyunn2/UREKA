@@ -15,6 +15,7 @@
       <sourceFolder url="file://$MODULE_DIR$/algo/self" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/intro" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/node_modules" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/algo/lecture" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

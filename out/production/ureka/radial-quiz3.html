@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>원형 그라데이션 3</title>
+   <style>
+      div {
+         width: 400px;
+         height: 300px;
+      }
+      .grad1 {
+         margin-bottom: 10px;
+         background: orange;
+         background: radial-gradient(yellow, white, orange);
+      }
+      .grad2 {
+         background: orange;
+         background: radial-gradient(yellow, white 10%, orange 60%);
+      }
+   </style>
+</head>
+<body>
+   <div class="grad1"></div>
+   <div class="grad2"></div>
+</body>
+</html>

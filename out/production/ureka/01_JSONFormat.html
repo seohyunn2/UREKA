@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script>
+    const obj = {
+      name: 'uplus',
+      age: 2,
+      alive: true,
+      hobby: ['traveling', 'coding']
+    }
+    /*
+      JSON.stringify(obj, replacer?, space?)
+      obj를 json 형식에 맞게 문자열로 변환하는 함수
+
+      replacer 함수: obj에서 특별한 처리를 한 정보만 추춣한다 => 추출한 정보만 문자열로 변환된다
+
+      space
+        - space를 안주면 변환된 문자열은 한 줄로 출력된다. (통신용으로 사용)
+        - space를 지정하면 문장열은 객체, 속성을 구분하기 편리하게 
+          엔터나 들여쓰기가 되어 출력된다. (개발자 확인용)
+    */
+    const jsonData = JSON.stringify(obj);
+    console.log(typeof jsonData, obj);
+    console.log('jsonData: ', jsonData);
+    console.log('space jsonData: ', JSON.stringify(obj, null, 2));
+  
+    /*
+    replacer 함수(key, value)
+    key   속성
+    value 값
+    */
+
+    function filter(key, value) {
+      // undefined를 리턴하면 해당 속성이 반환되지 않으므로 값이 number인 속성은 filtering된다. 
+      return typeof value === 'number'? undefined : value;
+    }
+    console.log('replacer jsonData: ', JSON.stringify(obj, filter, 2));
+
+    const todos = [
+      {id:1, content: "html", completed: true},
+      {id:2, content: "css", completed: true},
+      {id:3, content: "javascript", completed: false},
+    ] 
+    
+    console.log('array json: ', JSON.stringify(todos, null, 2));
+
+    /*
+      Storage       : 브라우저에 데이터를 저장하는 공간
+      localStorage  : 제거 명령이 있기 전까지 계속 유지
+      sessionStorage: 세션이 끊기면 제거 => 브라우저가 종료되면 (메모리에 유지)
+      
+      setItem(key, value)
+      key   : value를 구별하기 위한 키
+      value : storage 저장할 데이터
+   */
+    localStorage.setItem('todos', JSON.stringify(todos));
+
+
+</script>
+</head>
+<body>
+  
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script>
+    /*
+      Storage
+        getItem(key)
+        key에 해당하는 value를 문자열로 리턴
+    */
+  console.todosJson = localStorage.getItem("todos");
+  console.log(typeof todosJson);
+  console.log('todosJson: ', todosJson);
+
+  const todos = JSON.parse(todosJson);
+  console.log(todos)
+
+  for (const todo of todos) {
+    console.log(`todo id: ${todo.id}\tiscompleted:${todo.completed}\tcontent:${todo.content}`);
+  }
+  
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

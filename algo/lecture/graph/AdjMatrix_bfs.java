@@ -1,4 +1,4 @@
-package lecture.graph;
+package graph;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

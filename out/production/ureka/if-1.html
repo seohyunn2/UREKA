@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>조건문</title>
+</head>
+<body>
+  <script>
+    // 사용자가 입력한 숫자가 3의 배수인지 판별
+    let userNumber = prompt('숫자를 입력하세요.');
+    
+    // 결과가 많이 나오는 부분을 if에 넣고 -> 적은 부분을 else에
+    // null이 아닌 경우가 많으니까 얘를 먼저
+
+    // 중첩 if문
+    // if (userNumber !== null) {
+    //   if (parseInt(userNumber) % 3 === 0) { // 괄호 안에 들어가는 값이 참(true)
+    //     alert('3의 배수입니다!');
+    //   } else { // 거짓 (false)
+    //     alert('3의 배수가 아닙니다!');
+    //   }      
+    // } else {
+    //   alert('입력이 취소됐습니다.');
+    // }
+
+    if(userNumber != null) {
+      (parseInt(userNumber) % 3 === 0) ? alert('3의 배수입니다!') : alert('3의 배수가 아닙니다!');
+    } else {
+      alert('입력이 취소됐습니다.')
+    }
+    
+
+  </script>
+</body>
+</html>

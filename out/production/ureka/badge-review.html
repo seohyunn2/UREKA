@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>뱃지 가상요소 복습</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * {
+      margin: 0; 
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      position: relative;
+    }
+
+    .icon i::after {
+      font-size: 10px;
+      content: "4";
+      border-radius: 50%;
+      background-color: red;
+      color: white;
+
+      position: absolute;
+      right: 5px;
+      top: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="icon">
+    <i class="fa-regular fa-bell fa-2x"></i>
+  </div>
+</body>
+</html>

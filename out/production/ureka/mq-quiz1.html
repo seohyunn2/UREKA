@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>미디어 쿼리 작성해보기</title>
+   <style>
+      body {
+         display: flex;
+         background-image: url('images/bg-light.jpg');
+         justify-content: center;
+         align-items: center;
+         height: 100vh;
+      }
+      h1 {
+         font-size: 4rem;
+      }
+
+      @media screen and (min-width: 768px) and (max-width: 1023px) {
+         body {
+            background-image: url('images/bg-dark.jpg');
+            color: white;
+         }
+      }
+
+      /* 768px 미만 */
+      @media screen and (max-width: 767px) {
+         body {
+            background-image: url('images/bg-small.jpg');
+            color: white;
+         }
+      }
+   </style>
+</head>
+<body>
+   <h1> 미디어 쿼리 </h1>
+</body>
+</html>
