@@ -15,15 +15,17 @@ public class BinarySearchTest {
 		System.out.println(Arrays.toString(values));
 		System.out.println("---반복문---");
 		System.out.println(binarySearch1(65));
-		System.out.println(binarySearch1(2));
+		System.out.println(binarySearch1(12));
 		System.out.println("===================================");
 		System.out.println("---재귀---");
 		System.out.println(binarySearch2(65,0,values.length-1));
-		System.out.println(binarySearch2(2,0,values.length-1));
+		System.out.println(binarySearch2(12,0,values.length-1));
 		System.out.println("===================================");
-		System.out.println(Arrays.binarySearch(values, 65));
-		System.out.println(Arrays.binarySearch(values, 2));
 		// 못찾으면 -insertion point-1 값 리턴(0인덱스와 구분하기 위해 음수화시키고 -1)
+		// Math.abs(idx)-1 위치에 데이터를 추가하면 된다
+		System.out.println(Arrays.binarySearch(values, 65));
+		System.out.println(Arrays.binarySearch(values, 19));
+
 	}
 
 	// 반복문
