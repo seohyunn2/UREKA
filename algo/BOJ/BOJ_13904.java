@@ -11,7 +11,7 @@ public class BOJ_13904 {
         // 입력 내용 집어넣는 우선순위 큐
         PriorityQueue<int[]> homework = new PriorityQueue<>((a, b) -> {
            int result = a[0] - b[0];
-           if(result != 0){
+           if(result == 0){
                // 데드라인이 같으면 -> 점수에 대해 내림차순
                return b[1] - a[1];
            } else {
