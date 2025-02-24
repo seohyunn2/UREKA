@@ -28,14 +28,9 @@ public class BOJ_2573 {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
 
-//        Scanner sc = new Scanner(System.in);
-//        N = Integer.parseInt(sc.next());
-//        M = Integer.parseInt(sc.next());
-
         map = new int[N][M];
         sea = new int[N][M];
 
-        visited = new boolean[N][M];
         // map 입력값으로 초기화
         for(int i = 0; i < N; i++) {
             st = new StringTokenizer(in.readLine(), " ");
@@ -46,6 +41,8 @@ public class BOJ_2573 {
 
         while(true) {
             year++;
+//            System.out.println("year++");
+            sea = new int[N][M];
             for(int  i = 0; i < N; i++) {
                 for(int j = 0; j  < M; j++) {
                     if(map[i][j] > 0) {
@@ -72,7 +69,7 @@ public class BOJ_2573 {
             // 끝나는 조건
             // cnt가 2이상일 때 -> cnt 출력
             if(cnt >= 2) {
-                System.out.println(cnt);
+                System.out.println(year);
                 return;
             }
             boolean isZero = true;
@@ -87,6 +84,7 @@ public class BOJ_2573 {
             }
             if(isZero) {
                 System.out.println(0);
+                return;
             }
         }
     }
@@ -96,6 +94,9 @@ public class BOJ_2573 {
             for(int c = 0; c < M; c++) {
                 if(map[r][c] > 0) {
                     map[r][c] -= sea[r][c];
+                    if(map[r][c] < 0) {
+                        map[r][c] = 0;
+                    }
                 }
             }
         }
@@ -108,11 +109,14 @@ public class BOJ_2573 {
             nr = r + dr[i];
             nc = c + dc[i];
 
-            if(map[nr][nc] == 0) {
+//            if(map[nr][nc] == 0) {
+//                sea[r][c]++;
+//            }
+//            if(map[nr][nc] < 0) {
+//                sea[r][c] = 0;
+//            }
+            if(nr >= 0 && nr < N && nc >= 0 && nc < M && map[nr][nc] == 0) {
                 sea[r][c]++;
-            }
-            if(map[nr][nc] < 0) {
-                sea[r][c] = 0;
             }
         }
     }
