@@ -36,7 +36,7 @@ public class BOJ_1987 {
     }
 
     public static void DFS(int i, int j) {
-
+        if(maxDistance == 26) return;
         char c = map[i][j];
         alphabet[c - 'A'] = true; // 방문 처리
 
@@ -49,6 +49,7 @@ public class BOJ_1987 {
 
             if(nr < 0 || nr >= R || nc < 0 || nc >= C) continue; // 범위 밖에 있으면
             if(alphabet[map[nr][nc] - 'A']) continue; // 이미 방문 했으면
+
             DFS(nr, nc);
         }
 
