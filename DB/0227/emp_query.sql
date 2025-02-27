@@ -3,7 +3,7 @@ select * from EMP;
 
 -- 커미션(comm)을 받는 사원의 모든 정보를 조회하시오
 select * from EMP
-where COMM is not null; 
+where COMM is not null;
 
 -- 이름이 SM으로 시작하는 사원의 모든 정보를 조회하시오
 select * from EMP

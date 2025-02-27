@@ -3,7 +3,7 @@
 
 
 /* dual 테이블 
-   - Dumy 테이블 (1행 1열)
+   - Dumy 테이블 (1행 1열) -> 제공됨
    - 함수의 수행 결과를 조회할 경우에는 select 문을 통해서만 조회 
      ==> 그래서 함수 결과만 조회할 경우 dual 테이블을 이용해서 조회 
 */
@@ -16,7 +16,8 @@ from   dual;
   mysql : concat('문자열','문자열','문자열',... )
   기타   : 문자열 || 문자열|| 문자열 ...
 */
-
+select concat(brand, ' 상품은 ', maker, ' 제조사에서 생산한 제품입니다.')
+from goods;
 
 /*
 	문자열 추출 
@@ -40,7 +41,7 @@ select repeat('hello ',5) from dual;
 -- lower()   : 문자열을 소문자로 변환
 
 select email, length(email), reverse(email), upper(email), lower(email)
-from member;
+from members;
 
 /*
   공백 삭제
@@ -71,6 +72,11 @@ from dual;
 from goods
 order by INC_price asc;
        
+select gno, brand, price,
+	if(price < 10000, price*1.15, 
+			-- 거짓일 경우
+			if(price>30000, price*1.05, price*1.1)) as IncPrice
+from goods;
 
 /* 분류 번호가 10인 경우  음식
    10인 경우 음식
@@ -78,7 +84,12 @@ order by INC_price asc;
    30인 경우 책
    40인 경우 가구  */
    
-  
+select gno, brand, cno,
+	if(cno = '10', '음식', 
+		if(cno = '20', '전자제품', 
+			if(cno = '30', '책', 
+				if(cno = '40', '가구', '미분류')))) as '카테고리 이름'
+from goods;
    
 /*
   oracle인 경우 
@@ -97,8 +108,13 @@ select gno, brand
        , if(cno is null, '미분류', cno) as cno
 from   goods;       
 
-/*ifnull(문자 or column, 대체 정보) : null인 경우 대체 정보로 조회됨.*/
+/*ifnull(문자 or column, 대체 정보) : null인 경우 대체 정보로 조회됨.
+  oracle인 경우, nvl(), nvl2() 함수가 있음.
+*/
 
+select gno, brand, 
+	ifnull(cno, '미분류') as cno
+from goods;
 
 /*4. 날짜 관련 함수 */
 select  curdate(), curtime(), now(), sysdate(), current_timestamp() from dual;
@@ -108,10 +124,30 @@ select  curdate(), curtime(), now(), sysdate(), current_timestamp() from dual;
 -- DATE_SUB(날짜, INTERVAL 기준값) SUBDATE(날짜, INTERVAL 기준값)  날짜에서 기준값 만큼 뺸다.
 -- 기준값 : YEAR, MONTH, DAY, HOUR, MINUTE, SECOND
 
+-- 어제
+select DATE_SUB(now(), interval 1 day) from dual;
+
+-- 한 달 전
+select DATE_SUB(now(), interval 1 month) from dual;
+
+-- 내일
+select DATE_ADD(now(), interval 1 day) from dual;
 
 /*
 DAYOFWEEK(날짜) 날짜의 주별 일자 출력(일요일(1),월요일(2)…토요일(7))
 */
+select dayofweek(now()) from dual;
+select curdate() as today, 
+	case dayofweek(now())
+		when 1 then '일요일'
+        when 2 then '월요일'
+        when 3 then '화요일'
+        when 4 then '수요일'
+        when 5 then '목요일'
+        when 6 then '금요일'
+        when 7 then '토요일'
+	end as '요일'
+from dual;
 
 
            
@@ -126,8 +162,9 @@ FROM DUAL;
 */
 SELECT DAYOFYEAR(SYSDATE()) FROM DUAL;
           
-/* 오늘 부터 5월 24일까지 남은 날수 계산 */
-          
+/* 오늘 부터 8월 12일까지 남은 날수 계산 */
+select dayofyear('20250812') - dayofyear(now())
+from dual;          
 
 /*날짜의  년, 월, 일, 시, 분, 초를 반환
   YEAR, MONTH, DAYOFMONTH, HOUR, MINUTE, SECOND
@@ -136,6 +173,12 @@ select year(sysdate()), month(sysdate())
       ,dayofmonth(sysdate())
       ,hour(sysdate()), minute(sysdate()), second(sysdate())
 from dual;
+
+-- 지난 달에 판매된 상품을 조회하세요. -> 달 + 연도까지 비교해줘야
+select * from orders 
+where month(odate) = month(date_sub(now(), interval 1 month))
+		and year(odate) = year(now());
+-- where odate >= '20250101' and odate <= '20250131';
       
 /* 해당 월, 요일의 이름을 반환하는 MONTHNAME / DAYNAME */
 SELECT MONTHNAME(SYSDATE()), DAYNAME(SYSDATE())
