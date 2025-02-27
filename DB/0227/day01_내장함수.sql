@@ -8,7 +8,7 @@
      ==> 그래서 함수 결과만 조회할 경우 dual 테이블을 이용해서 조회 
 */
 select floor(3.1) , ceil(3.1), round(3.1), round(3.5)
-from   dual; 
+from   dual;
 
 
 /* 
@@ -28,8 +28,8 @@ from goods;
       시작 위치는 1부터 
 */
 select brand, right(brand, 2), left(brand, 2)
-	 , substring(brand, 1, 3)
-     , substr(brand, 1, 3)
+        , substring(brand, 1, 3)
+        , substr(brand, 1, 3)
 from goods;
 
 -- repeat(column or 문자, 숫자) : 지정한 문자열을 지정할 수만큼 반복
@@ -64,18 +64,18 @@ from dual;
    가격이 10000원 미만이면 15%을 가격을 인상하고 10000원 이상은 10% 가격을 인상하시오
    인상된 가격을 기준으로 오름 차순으로 정렬하시오
 */
- select gno, brand, price
-	  ,case
-         when  price <10000  then price *1.15
-         when  price >=10000 then price *1.1
-	   end  as INC_price
+select gno, brand, price
+     ,case
+          when  price <10000  then price *1.15
+          when  price >=10000 then price *1.1
+    end  as INC_price
 from goods
 order by INC_price asc;
-       
+
 select gno, brand, price,
-	if(price < 10000, price*1.15, 
-			-- 거짓일 경우
-			if(price>30000, price*1.05, price*1.1)) as IncPrice
+       if(price < 10000, price*1.15,
+           -- 거짓일 경우
+          if(price>30000, price*1.05, price*1.1)) as IncPrice
 from goods;
 
 /* 분류 번호가 10인 경우  음식
@@ -83,14 +83,14 @@ from goods;
    20인 겨우 전자제품
    30인 경우 책
    40인 경우 가구  */
-   
+
 select gno, brand, cno,
-	if(cno = '10', '음식', 
-		if(cno = '20', '전자제품', 
-			if(cno = '30', '책', 
-				if(cno = '40', '가구', '미분류')))) as '카테고리 이름'
+       if(cno = '10', '음식',
+          if(cno = '20', '전자제품',
+             if(cno = '30', '책',
+                if(cno = '40', '가구', '미분류')))) as '카테고리 이름'
 from goods;
-   
+
 /*
   oracle인 경우 
   decode( 논리식, 참일때,거짓일때)
@@ -105,15 +105,15 @@ from goods;
   상품번호, 상품명, 분류번호 조회  단, 분류번호가 null인경우 미분류로 표시
 */
 select gno, brand
-       , if(cno is null, '미분류', cno) as cno
-from   goods;       
+     , if(cno is null, '미분류', cno) as cno
+from   goods;
 
 /*ifnull(문자 or column, 대체 정보) : null인 경우 대체 정보로 조회됨.
   oracle인 경우, nvl(), nvl2() 함수가 있음.
 */
 
-select gno, brand, 
-	ifnull(cno, '미분류') as cno
+select gno, brand,
+       ifnull(cno, '미분류') as cno
 from goods;
 
 /*4. 날짜 관련 함수 */
@@ -137,20 +137,20 @@ select DATE_ADD(now(), interval 1 day) from dual;
 DAYOFWEEK(날짜) 날짜의 주별 일자 출력(일요일(1),월요일(2)…토요일(7))
 */
 select dayofweek(now()) from dual;
-select curdate() as today, 
-	case dayofweek(now())
-		when 1 then '일요일'
-        when 2 then '월요일'
-        when 3 then '화요일'
-        when 4 then '수요일'
-        when 5 then '목요일'
-        when 6 then '금요일'
-        when 7 then '토요일'
-	end as '요일'
+select curdate() as today,
+       case dayofweek(now())
+           when 1 then '일요일'
+           when 2 then '월요일'
+           when 3 then '화요일'
+           when 4 then '수요일'
+           when 5 then '목요일'
+           when 6 then '금요일'
+           when 7 then '토요일'
+           end as '요일'
 from dual;
 
 
-           
+
 /*
 날짜의 요일을 숫자로 반환하는 WEEKDAY(월요일(0) ~ 일요일(6) 반환) 
 */
@@ -161,32 +161,38 @@ FROM DUAL;
 1월1일부터 해당날짜까지의 날수를 반환하는 DAYOFYEAR
 */
 SELECT DAYOFYEAR(SYSDATE()) FROM DUAL;
-          
+
 /* 오늘 부터 8월 12일까지 남은 날수 계산 */
 select dayofyear('20250812') - dayofyear(now())
-from dual;          
+from dual;
 
 /*날짜의  년, 월, 일, 시, 분, 초를 반환
   YEAR, MONTH, DAYOFMONTH, HOUR, MINUTE, SECOND
 */
 select year(sysdate()), month(sysdate())
-      ,dayofmonth(sysdate())
-      ,hour(sysdate()), minute(sysdate()), second(sysdate())
+        ,dayofmonth(sysdate())
+        ,hour(sysdate()), minute(sysdate()), second(sysdate())
 from dual;
 
--- 지난 달에 판매된 상품을 조회하세요. -> 달 + 연도까지 비교해줘야
-select * from orders 
+-- 지난 달에 판매된 상품을 조회하세요.
+-- 지난 해 정보도 조회된다.
+-- => 달 + 연도까지 비교해줘야
+select * from orders
 where month(odate) = month(date_sub(now(), interval 1 month))
-		and year(odate) = year(now());
--- where odate >= '20250101' and odate <= '20250131';
-      
+  and year(odate) = year(now());
+
+-- 연도와 월을 concat하는 방법으로 하면: 
+select * from orders
+where concat(year(odate), month(odate))
+          = concat(year(now()), month(date_sub(now(), interval 1 month)));
+
 /* 해당 월, 요일의 이름을 반환하는 MONTHNAME / DAYNAME */
 SELECT MONTHNAME(SYSDATE()), DAYNAME(SYSDATE())
 FROM DUAL;
 
 /* 해당날짜의 분기를 반환해주는 QUARTER (1~4반환)  */
-SELECT QUARTER(SYSDATE())  FROM DUAL;       
-          
+SELECT QUARTER(SYSDATE())  FROM DUAL;
+
 /*
 date_format(column,  format)
 %y   : 년 두자리 
@@ -197,13 +203,16 @@ date_format(column,  format)
 %h   : 12시간을 베이스로한 시간
 %i   : 분
 %s   : 초 
+%p	 : PM
 */
 
 select date_format(sysdate(), '%y년 %m월 %d일 -  %p %h시 %i분 %s초') as today
 from dual;
-   
 
+-- date_format을 이용해서 이번 달에 판매된 상품 조회
+select * from orders
+-- where date_format(odate, '%m') = date_format(now(), '%m')
+-- 	and date_format(odate, '%y') = date_format(now(), '%y');
 
-
-
-
+-- 이렇게 쓰는 게 더 나은 듯 
+where date_format(odate, '%y%m') = date_format(now(), '%y%m');
