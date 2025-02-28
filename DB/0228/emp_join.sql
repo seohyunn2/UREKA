@@ -24,7 +24,7 @@ on sal between losal and hisal
 where ename like '%A%';
 
 -- 5. 사원번호, 이름, 급여, 급여 등급을 조회하시오
-select empno, ename, job, sal, grade
+select empno, ename, sal, grade
 from emp
 left join salgrade
 on sal between losal and hisal;
@@ -46,11 +46,13 @@ where e.mgr = m.empno and m.ename = 'BLAKE';
 -- 9. 급여 등급이 1등급에 해당하는 사원의 모든 정보를 추출
 select empno, ename, job, mgr, hiredate, sal, comm, deptno
 from emp
-left join salgrade
-on grade = 1;
+join salgrade
+on sal between losal and hisal
+where grade=1;
 
 -- 10. GOODS 테이블에 등록된 총 상품 개수와 분류명별 상품 개수를 추출
-select if(grouping(name) = 1, 'total', ifnull(name, '미분류')) as '카테고리', count(*) as '총 상품 개수' 
+select if(grouping(name) = 1, 'total', ifnull(name, '미분류')) as '카테고리', 
+	count(*) as '총 상품 개수' 
 from goods
 left join category
 using (cno)

@@ -226,11 +226,12 @@ group by gno with rollup; -- 2
 
 -- 총 주문 수량 rollup까지 하려면...
 select if(grouping(gno) = 1, 'total', gno) as goodsNo, 
-	if(grouping(gno) = 1, NULL, max(brand)) as brand, ifnull(sum(quantity), 0) as quantity -- 3
-from goods -- 1
+	if(grouping(gno) = 1, NULL, max(brand)) as brand, 
+    ifnull(sum(quantity), 0) as quantity
+from goods
 left join orders
 using (gno)
-group by gno with rollup; -- 2
+group by gno with rollup;
 
 
 
