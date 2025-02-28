@@ -17,7 +17,8 @@ show variables where variable_name like '%low%';
   2) [where  조건]								 	 x				x
   3) [group by 컬럼명, ..	[having 조건]]         	 	 o				x		
   5) [order by 컬럼명 [asc|desc]], ...]			 	 o				o
-		-> select문의 alias는 orderby부터 사용 가능 (where이나 groupby 등에서 못씀 - mySql은 group by에서 가능)
+		-> select문의 alias는 orderby부터 사용 가능 
+        (where이나 groupby 등에서 못씀 - mySql은 예외적으로 group by에서 가능)
 */
 
 -- member 테이블의 모든행, 모든 열 정보를 조회
