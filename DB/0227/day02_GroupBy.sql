@@ -1,6 +1,7 @@
 /*
 집계함수(aggregation), 그룹함수(group)함수 
  - 지정한 group에 함수 기능 처리한 결과가 1개가 조회된다. 
+ - 내장함수 쓰면 -> 테이블의 행 개수만큼 조회된다. 
  - group by로 그룹을 지정하지 않으면 전체 데이타가 한개의 group으로 지정된다. 
  - 주의) group의 수와 다른 데이터를 같이 조회하면 mysql은 의미 없는 결과가 나오지만 
         oracle, db2,... 다른 DB는 error가 발생한다. 
@@ -13,10 +14,23 @@
     distinct   중복된 값을 제거하고 처리 
 */
 
+-- 전체 직원수를 조회
+select count(*) from emp;
+
+-- 커미션을 받는 사원수를 조회
+select count(comm) from emp;
+
+select * from emp;
+
+-- 최소 급여, 최대 급여, 평균 급여 조회
+select min(sal), max(sal), avg(sal) 
+from emp;
+
+
 /*
  * 다중행 함수 , 집계함수, group 함수
   -  지정한 group에 함수 기능을 처리한 결과가 1개가 조회된다. 
-  -  group을 goupy by로 지정하지 않으면 전체 행이 1개의 group으로 지정된다. 
+  -  group을 group by로 지정하지 않으면 전체 행이 1개의 group으로 지정된다. 
   -  주의) group의 수와 다른 데이타 개수가 조회되는 컬럼을 같이 조회하면
           oralce, db2.... 다른 DB는 error가 발생한다. 
           *** Mysql은 ONLY_FULL_GROUP_BY 설정이 기본으로 안되어 있어서 다른 컬럼과 
@@ -26,6 +40,11 @@
              set @@session.sql_mode='STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_BY';
     
 			 edit>preperance>modeling>mysql>sql_mode 에서도 설정 가능 
+             
+             
+	 ex. empno -> 14개, 나머지 -> 1개 => 오류!
+			select empno, min(sal), max(sal), avg(sal) 
+			from emp;
   - 사용방법
     집계함수(all | distinct  컬럼명)  
        - distinct : 중복된 값을 제거하고 집계한다. 
@@ -75,7 +94,10 @@
 
 
 -- 부서별 인원수와, 평균 급여를 조회 
-
+select deptno, count(*), avg(sal)
+from emp
+group by deptno
+order by deptno;
 
 
 /* having
