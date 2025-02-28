@@ -187,4 +187,15 @@ order by price desc;
 
 -- 분류번호를 기준으로 내림 차순 정렬, 같은 분류내에서는 제품명을 기준으로 오름 차순 
 select * from goods
-order by cno desc, brand asc;
+order by cno desc, brand;
+
+
+-- select empno as employeeNo, ename as employeeName, sal as salary
+-- from emp
+-- where employeeNo > 7500; -- where절에 column alias 사용하면 에러 발생 (unknown column)
+
+select empno as employeeNo, ename as employeeName, sal as salary
+from emp
+where empno > 700
+order by employeeNo; -- order by 절에서는 column alias를 사용할 수 있다. 
+

@@ -18,12 +18,13 @@
 select count(*) from emp;
 
 -- 커미션을 받는 사원수를 조회
+-- comm이 null이 아닌 행의 개수를 반환해줌 
 select count(comm) from emp;
 
 select * from emp;
 
 -- 최소 급여, 최대 급여, 평균 급여 조회
-select min(sal), max(sal), avg(sal) 
+select min(sal), max(sal), avg(sal), avg(all sal), avg(distinct sal)
 from emp;
 
 
@@ -96,9 +97,20 @@ from emp;
 -- 부서별 인원수와, 평균 급여를 조회 
 select deptno, count(*), avg(sal)
 from emp
-group by deptno
-order by deptno;
+group by deptno -- deptno별로 그룹 => 이거 별로 볼 수 있다
+order by deptno; 
 
+-- 업무별 인원수와 평균 급여를 조회
+select job, count(*) as 인원, round(avg(sal), 2) as sal
+from emp
+group by job
+order by job; 
+
+-- 부서별/업무별 인원수와 평균 급여를 조회
+select deptno, job, count(*), round(avg(sal), 2) as sal
+from emp
+group by deptno, job
+order by deptno, job;
 
 /* having
    - group 집계한 결과에 대한 조건은 having절에서 한다. 
@@ -112,13 +124,29 @@ order by deptno;
  where => 행 하나 하나에 대한 조건 처리  
 */
 
--- 부서별 평균 급여가 5000이상인 부서를 조회
+-- 부서별 평균 급여가 2000이상인 부서를 조회
+select deptno, avg(sal)
+from emp
+group by deptno 
+having avg(sal) >= 2000
+order by deptno;
 
 
 
--- 사원의 급여가 3000이상 사원들이 근무하는 부서 중 평균 급여가 5000이상인 부서를 조회
+insert into emp(empno, ename, sal, deptno)
+values(1, 'ureka', 5000, 40);
+-- 모든 사원의 급여가 1000이상인 사원들이 근무하는 부서 중 평균 급여가 5000인 부서를 조회
+select deptno, round(avg(sal),2) as avgSal
+from emp
+group by deptno
+having min(sal) >= 1000 and avgSal >= 5000;
 
-
+-- 사원의 급여가 3000 이상인 사원들만 뽑고 그들의 부서별 평균 급여가 5000 이상인 부서를 조회
+select deptno, round(avg(sal), 2) as avgSal
+from emp
+where sal >= 3000
+group by deptno
+having avgSal >= 5000;
 
 
 -- 알리아스를 where에서 사용할 수 없다. 
@@ -126,30 +154,50 @@ order by deptno;
 
 
 -- 부서별 급여 평균과, 최소 급여, 최대 급여를 조회 
-
+select deptno, avg(sal) as avgSal, min(sal) as minSal, max(sal) as maxSal
+from emp
+group by deptno;
 
 -- 업무별 근무 인원, 급여 평균과, 최소 급여, 최대 급여를 조회 
 
 
 -- 업무별 급여 평균이 2500이상이 업무 조회 
-
+select ifnull(job, '프리랜서') as job, round(avg(sal), 2) as avgSal
+from emp
+group by job
+having avgSal >= 2500;
 
 -- 카테고리별 가격 평균을 조회 단, 가격 평균이 500000이상인 카테고리는 제외하고 조회한다. 
-
+select ifnull(cno, '미분류') as cno, round(avg(price), 2) as avgPrice
+from goods
+group by cno
+having avgPrice < 500000;
 
 -- 급여가 1500이상인 사원들의 부서별 급여 평균을 조회
 -- 단 급여 평균이 2000이상인 부서만 조회 
+select deptno, round(avg(sal), 2) as avgSal
+from emp
+where sal >= 1500
+group by deptno
+having avgSal >= 2000
+order by deptno;
 
 
-
-/*rollup :group별 통계에  전체 통계를 추가로 조회 
+/*rollup :group별 통계에 전체 통계를 추가로 조회 (전체 집계)
   형식] group by 컬럼명 with rollup;
+  그룹으로 나눈 전 단계에 대한 집계
  */
 -- 업무별 근무 인원, 급여 평균과, 최소 급여, 최대 급여를 조회
+-- select ifnull(job, '프리랜서'), count(*) as '근무 인원', 
+select job, count(*) as '근무 인원', 
+    round(avg(sal)) as avgSal,
+    min(sal) as minSal,
+    max(sal) as maxSal
+from emp
+group by job with rollup;
 
 
-
-/**oralce 버전
+/**oracle 버전
 select ifnull(job,'total'), count(*), round(avg(sal),2), min(sal), max(sal)
 from   emp
 group by rollup(job);
@@ -158,13 +206,31 @@ group by rollup(job);
 /*grouping()
   rollup에 의해 조회된 데이타는 1 그렇지 않은 데이타는 0이 조회된다. 
 */
+select grouping(job), ifnull(job, '프리랜서'), count(*) as '근무 인원', 
+    round(avg(sal)) as avgSal,
+    min(sal) as minSal,
+    max(sal) as maxSal
+from emp
+group by job with rollup;
+
+select if(grouping(job) = 1, 'total', ifnull(job, '프리랜서')) as job, 
+	count(*) as '근무 인원', 
+    round(avg(sal)) as avgSal,
+    min(sal) as minSal,
+    max(sal) as maxSal
+from emp
+group by job with rollup;
 
 
-
+-- 카테고리별 가격 평균, 최저 가격, 최고 가격 조회
 -- cno가 null인 경우 미분류로 표시, 그렇지 않으면 카테고리 번호로 표시 
 -- rollup에 의해 null인 경우 total 
- 
-
+select if(grouping (cno) = 1, 'total', ifnull(cno, '미분류')) as cno, 
+	round(avg(price)) as avgPrice,
+    min(price) as minPrice,
+    max(price) as maxPrice
+ from goods
+ group by cno with rollup;
 
 -- 부서별, 업무별 근무 인원을 조회, 전체 근무 인원 
 
