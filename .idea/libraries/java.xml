@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="java">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/BackEnd/lib/mysql-connector-java-8.0.13.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/SpringBootTest/src/main/java" />
+      <root url="file://$PROJECT_DIR$/SpringBootTest/src/test/java" />
+    </SOURCES>
+  </library>
+</component>
