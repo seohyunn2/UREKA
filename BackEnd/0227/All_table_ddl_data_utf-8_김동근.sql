@@ -4,6 +4,8 @@ drop table if exists  orders 	cascade;
 drop table if exists  goods 	cascade;
 drop table if exists  category 	cascade;
 drop table if exists  members 	cascade;
+-- 삭제할 때에는 자식 먼저 삭제해야됨 (위에서부터 순서대로)
+
 
 -- 회원 정보
 
@@ -108,7 +110,7 @@ insert into orders (odate, id, gno, quantity, address) values
 
 -- 게시판 (board)
 create table board(
-  no        int  primary key,					-- 게시물 번호
+  no        int auto_increment primary key,	-- 게시물 번호
   id        varchar(30),						-- 작성자 id
   title     varchar(200),						-- 제목
   regdate   datetime default CURRENT_TIMESTAMP,	-- 작성일
