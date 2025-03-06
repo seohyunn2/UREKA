@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.uplus.ureka.member.model.dto.Member;
@@ -14,8 +15,10 @@ import com.uplus.ureka.util.DBUtil;
 
 @Repository
 public class MemberDaoImp implements MemberDao {
-	
-	private DataSource ds;				//@Autowired 안 붙여도 됨.
+
+	// 의존
+//	@Autowired
+	private DataSource ds;				//@Autowired 안 붙여도 됨. -> 자동으로 주입시켜줌
 	private DBUtil util;
 	
 	/**클래스 내에 생성자가 한개 있으면 해당 생성자로 객체를 생성하면서 인자로 선언한 객체를 자동 주입한다.  */

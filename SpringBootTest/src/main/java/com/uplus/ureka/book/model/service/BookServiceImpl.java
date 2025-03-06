@@ -11,6 +11,7 @@ import com.uplus.ureka.book.model.dto.BookException;
 import com.uplus.ureka.book.model.dto.PageBean;
 import com.uplus.ureka.util.PageUtility;
 
+@Service
 public class BookServiceImpl implements BookService {
 	
 	private BookDao dao;
