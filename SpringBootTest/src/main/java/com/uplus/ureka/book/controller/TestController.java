@@ -1,10 +1,14 @@
 package com.uplus.ureka.book.controller;
 
+import com.uplus.ureka.member.model.dto.Member;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /*
  * @RestController  
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController	
 
 //RestFul에서 서비스할 자원(Domain)명을 붙인다
+// @RequestMapping("/요청명")
 @RequestMapping("/test")
 
 /*
@@ -26,6 +31,9 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = {"*"})
 public class TestController {
 	private Logger logger = LoggerFactory.getLogger(getClass());
+	public TestController() {
+		logger.debug("TestController 생성됨.");
+	}
 
 	/**
 	 * error 메세지 처리시 한글인 경우 깨지므로 한글 처리를 해야한다. 
@@ -33,7 +41,17 @@ public class TestController {
 	 * @ExceptionHandler
 	 * 해당 컨트롤러에서 발생하는 오류를 처리하는 Annotation
 	 */
-	
+
+	@ExceptionHandler
+	public ResponseEntity<String> handler(Exception e){
+		logger.error("msg: {}", e.getMessage());
+
+		HttpHeaders resheader = new HttpHeaders();
+		// 에러 메시지가 한글인 경우 깨지므로 한글 처리를 위한 응답 헤더 설정
+		resheader.add("Content-Type", "application/json;charset-UTF-8");
+		return new ResponseEntity<String>("처리 중 오류 발생", resheader, HttpStatus.INTERNAL_SERVER_ERROR);
+ 	}
+
 	/**
 	 * Get방식의 Form Data or Query String을 추출하는 방법
 	 * 
@@ -50,13 +68,37 @@ public class TestController {
 	 *        
 	 * 2. 요청 데이타가 많은 경우 
 	 *    2.1 @RequestParam Map
-	 *     - request packet에 있는 모든 요청 데이타를 추출해서 Map에 저장해서 전달 된다.           
+	 *     - request packet에 있는 모든 요청 데이타를 추출해서 Map에 저장해서 전달 된다.
+	 *     -> Map을 쓰면 어떤 데이터가 포함돼있는지 알기 어려움
 	 *     
 	 *    2.2 DTO  ==> @ModelAttriute를 붙여도 되고 안붙여도 됨. 
 	 *   	 - 지정한 DTO의 객체를 생성하고
 	 *       객체에 선언된 모든 속성에 대해서 - 속성 이름으로 요청데이타를 추출 후 setter 함수로 객체에 setting
+	 *       - 속성에 지정되지 않은 요청 데이터는 무시한다.
 	 */
-	
+
+//	@GetMapping // get으로 요청시
+//	public ResponseEntity<String> hello(@RequestParam (value="msg") String msg) {
+//		System.out.println("요청 데이터 : " + msg);
+//		ResponseEntity<String> response = new ResponseEntity<String>("success", HttpStatus.OK);
+//		return response;
+//	}
+
+	// 파라미터에 뭐가 들어가든 상관 없다
+//	@GetMapping // get으로 요청시
+//	public ResponseEntity<Map> hello(@RequestParam Map<String, String> reqData) {
+//		System.out.println("요청 데이터 : " + reqData);
+//		ResponseEntity<Map> response = new ResponseEntity<Map>(reqData, HttpStatus.OK);
+//		return response;
+//	}
+
+	// 얘는 반드시 멤버 속성명으로 보내야함 (멤버를 출력하니까...)
+	@GetMapping // get으로 요청시
+	public ResponseEntity<Member> hello(Member member) {
+		System.out.println("요청 데이터 : " + member);
+		ResponseEntity<Member> response = new ResponseEntity<Member>(member, HttpStatus.OK);
+		return response;
+	}
 	/**
 	 * ResponseEntity
 	 * 응답 데이타를 담을 객체
@@ -66,13 +108,28 @@ public class TestController {
 	 * @PathVariable
 	 * 요청 데이타가 url에 있는 경우 path에서 데이타를 전달 받을 때 사용하는 Annotation 
 	 * Get 방식에서 범위 데이타를 요청할때와 pk를 이용한 1개의 데이타를 요청할때를 
-	 * 구별하기 path로 전달된 pk를 추출할때 사용한다. 
+	 * 구별하기 path로 전달된 pk를 추출할때 사용한다.
+	 *
+	 * [형식]
+	 * @GetMapping("/{데이터명}")
+	 * public ResponseEntity 메서드명(@PathVariable("데이터명") Type 인자명)
 	 */
+	@GetMapping("/{isbn}")
+	public ResponseEntity<String> search(@PathVariable("isbn") String isbn) {
+		logger.debug("search isbn : {}", isbn);
+		return new ResponseEntity<String>("success - isbn", HttpStatus.OK);
+	}
 
-	
 	/**
 	 * @RequestBody
-	 * 요청 방식이 Put과 Post이면서 요청 데이타가 JOSON 형식일 때 
+	 * 요청 방식이 Put과 Post이면서 요청 데이타가 JSON 형식일 때
 	 * 전달되는 요청 packet의 body를 객체로 전달 받을 때 사용하는 Annotation 
 	 */
+
+	@PostMapping
+	public ResponseEntity<Member> regist(@RequestBody Member member) {
+		logger.debug("regist member: {}", member);
+		throw new RuntimeException();
+//		return new ResponseEntity<Member>(member, HttpStatus.OK);
+	}
 }

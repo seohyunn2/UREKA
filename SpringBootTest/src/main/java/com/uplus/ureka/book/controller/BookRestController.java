@@ -2,13 +2,16 @@ package com.uplus.ureka.book.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.uplus.ureka.book.model.dto.Book;
 import com.uplus.ureka.book.model.dto.BookException;
 import com.uplus.ureka.book.model.dto.PageBean;
 import com.uplus.ureka.book.model.service.BookService;
+
+import java.util.List;
 
 /*
  * @RestController  
@@ -27,10 +30,34 @@ import com.uplus.ureka.book.model.service.BookService;
  *     ==> 보안에 취약하므로 상용에서는 사용 안함
  *     ==> 이후에 Configuration을 통해 설정할 예정  
  * */
+
+@CrossOrigin(origins = {"*"})
 public class BookRestController {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	private static final String SUCCESS="SUCCESS";
-	
+
+	private BookService service;
+	public BookRestController(BookService service) {
+		this.service = service;
+	}
+
+	@GetMapping("/{isbn}")
+	public ResponseEntity<Book> search(@PathVariable("isbn") String isbn) {
+		logger.debug("isbn: {}", isbn);
+
+		Book book = service.search(isbn);
+		return new ResponseEntity<Book>(book, HttpStatus.OK);
+	}
+
+	/**
+	 * ResponseEntity<?>
+	 * ? : anyType
+	 */
+//
+//	@GetMapping
+//	public ResponseEntity<?> searchAll(PageBean bean) {
+//
+//	}
 
 	/**
 	 * error 메세지 처리시 한글인 경우 깨지므로 한글 처리를 해야한다. 
