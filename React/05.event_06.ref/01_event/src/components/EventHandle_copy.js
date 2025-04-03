@@ -49,6 +49,7 @@ const EventHandle = () => {
         확인
       </button>
       <div>
+        {/* username이 null이 아니면 -> : */}
         {username} {username !== "" && ":"} {message}
       </div>
     </div>
