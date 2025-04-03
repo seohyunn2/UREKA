@@ -1,5 +1,5 @@
 import "./App.css";
-import IterationSample from "./IterationSample1";
+import IterationSample from "./IterationSample2";
 function App() {
   return (
     <div className="App">
