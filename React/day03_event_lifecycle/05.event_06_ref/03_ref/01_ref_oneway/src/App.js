@@ -1,5 +1,5 @@
 import "./App.css";
-import OneWayBind from "./OneWayBind";
+import OneWayBind from "./OneWayBind2";
 function App() {
   return (
     <div className="App">

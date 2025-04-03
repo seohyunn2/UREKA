@@ -1,5 +1,5 @@
 import "./App.css";
-import ValidationSample from "./ValidationSample";
+import ValidationSample from "./ValidationSample2";
 // import ScrollBox from './ScrollBox';
 // import { useRef } from "react";
 function App() {
