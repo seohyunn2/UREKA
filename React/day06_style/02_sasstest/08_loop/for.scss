@@ -1,0 +1,26 @@
+/*
+#{변수명} : 변수 값을 클래스명이나 속성 값에 동적으로 적용
+
+반복문을 활용해서 스타일 자동 생성
+Ex) 여러 개의 버튼 스타일 자동 생성
+
+for : 단순 반복
+형식]
+@for $반복변수명 from 시작 through 끝{
+    #{반복변수}
+}
+
+each   : 리스트나 맵을 반복
+형식]
+each $변수명 in list/map{}
+*/
+
+//리스트
+$colors: red, blue, green;
+
+//맵
+$simentic: (
+  primary: #0d6efd,
+  success: #198754,
+  danger: #dc3545,
+);
