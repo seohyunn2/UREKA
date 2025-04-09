@@ -1,3 +1,8 @@
+@charset "UTF-8";
+/*
+재사용 가능한 스타일 상속 받은 선택자들이 공유하는 방식 
+선택자 병합 방식이기 때문에 예기치 못한 사이드 이펙트가 발생할 수 있음
+*/
 .button-basic, .button-submit, .button-report {
   padding: 15px;
   font-size: 16px;
@@ -16,7 +21,6 @@
 
 .button-submit {
   background-color: green;
-  color: #fff;
 }
 
 /*# sourceMappingURL=index.css.map */

@@ -7,4 +7,15 @@
 독립적이지 않음 : stand alone으로 컴파일 되지 않는 것을 의미. 다른 SCSS 파일에 import되어 사용될 목적으로 만들어진다
 
 형식] import 'url';
+
+형식] @use 'url';
+사용형식] @include 이름;    -- 해당 mixin이 상용구처럼 추가된다.
 */
+
+@use "base";
+
+.inverse {
+  height: 200px;
+  width: 300px;
+  background-color: base.$primary-color;
+}

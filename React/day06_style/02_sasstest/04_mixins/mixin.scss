@@ -13,3 +13,9 @@
 
 @include 이름($인자명:값);    //인자가 여러개 일때 인자는 이름 기반으로 인자 전달
 */
+
+@mixin theme($theme: Darkgray) {
+  background-color: $theme;
+  box-shadow: 5px 5px 1px rgba($theme, 0.25);
+  color: white;
+}

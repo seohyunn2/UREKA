@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*
 중첩(Nesting)
 계층적으로 상속되는 CSS를 더욱 계층적으로 보이게 만드는 기능
@@ -5,17 +6,4 @@
 지나치게 깊은 depth로 사용하면 오히려 유지 보수성이 떨어지므로 중첩은 3 depth 이내로 하는것이 권장된다. 
 */
 
-nav {
-  ul {
-    padding: 0;
-    list-style: none;
-    li {
-      display: inline;
-    }
-    a {
-      display: block;
-      text-decoration: none;
-      padding: 6px 12px;
-    }
-  }
-}
+/*# sourceMappingURL=index.css.map */
