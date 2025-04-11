@@ -1,0 +1,22 @@
+@use "../style/base" as base;
+
+.TodoTemplate {
+  width: 512px;
+  margin: 0 auto;
+  border-radius: 5px;
+  overflow: hidden;
+  // border: 1px solid blue;
+
+  .app-title {
+    background-color: base.$primary-color;
+    color: base.$natural-color;
+    font-size: base.$title-font-size;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+  }
+  .content {
+    background-color: base.$natural-color;
+    padding: 10px;
+  }
+}

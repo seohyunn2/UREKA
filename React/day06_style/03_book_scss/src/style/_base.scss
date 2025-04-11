@@ -1,0 +1,13 @@
+$primary-color: #007bff;
+$secondary-color: #f4f4f4;
+$natural-color: white;
+$primary-hover-color: #0056b3;
+@mixin border {
+  border: 1px solid #ddd;
+}
+
+@mixin column-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
