@@ -80,7 +80,7 @@
 
     <script>
       document.getElementById("bookForm").addEventListener("submit", regist);
-      const API_BASE_URL = "http://localhost:8080/eureka/book";
+      const API_BASE_URL = "http://10.4.2.100:8080/eureka/book";
       async function regist(e) {
         e.preventDefault();
 
@@ -93,7 +93,8 @@
           img: document.getElementById("img").value,
         };
         try {
-         
+          const response = await axios.post(API_BASE_URL, bookData);
+          console.log(response);
         } catch (error) {
           alert("도서 등록 실패");
           console.error(error);

@@ -79,8 +79,8 @@
     </form>
 
     <script>
-      const bookIsbn = "54321";
-      const API_BASE_URL = "http://localhost:8080/eureka/book";
+      const bookIsbn = "43";
+      const API_BASE_URL = "http://10.4.2.100:8080/eureka/book";
 
       // 1. 페이지 로딩 시 기존 도서 정보 가져오기
       window.onload = async function () {
@@ -114,7 +114,8 @@
         };
 
         try {
-         
+          const response = await axios.put(API_BASE_URL, bookData);
+          console.log(response.data);
         } catch (error) {
           alert("수정 중 오류가 발생했습니다.");
           console.error(error);
