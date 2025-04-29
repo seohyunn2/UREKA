@@ -14,7 +14,9 @@ const api = axios.create({
 
 api.interceptors.request.use(async (config) => {
   //////////// TODO 5.  next-auth를 통해 accessToken과 refreshToken 가져오기
-
+  const session = await getSession();
+  const accessToken = session?.accessToken;
+  const refreshToken = session?.refreshToken;
   console.log("axios.....accessToken:", accessToken);
   console.log("axios.....refreshToken:", refreshToken);
 

@@ -17,9 +17,13 @@ export default function MemberDetail() {
   const [id, setId] = useState<string>("");
 
   //////////// TODO 7.   next-auth를 통해 session  추출하기
+  const { data: session } = useSession();
 
   useEffect(() => {
     //////////// TODO 8. session을 통해 id 설정하기
+    if (session && session.id) {
+      setId(session.id);
+    }
   }, []);
 
   const {

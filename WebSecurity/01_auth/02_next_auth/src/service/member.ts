@@ -6,6 +6,13 @@ export const searchMember = async (id: string): Promise<ResMember> => {
   return data;
 };
 
+export const logoutMember = async (id: string) => {
+  console.log("service>member>logoutMember...id:", id);
+  const { data } = await axios.get(`/member/logout/${id}`);
+
+  return data;
+};
+
 export const updateMember = async (member: Member): Promise<ResMember> => {
   const { data } = await axios.put("/member", member);
   return data;
